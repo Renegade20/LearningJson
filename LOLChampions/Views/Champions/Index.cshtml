@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+    <title>Campions App</title>
+</head>
+<body>
+
+    <div>
+        <h2>All Campions</h2>
+        <ul id="champions" />
+        
+    </div>
+    <div>
+        <h2>Search by ID</h2>
+        <input type="text" id="champId" size="5" />
+        <input type="button" value="Search" onclick="find();" />
+        <p id="champion" />
+    </div>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        var uri = "https://prod.api.pvp.net/api/lol/static-data/na/v1/champion?api_key=9af31022-0fe1-4e69-9c9a-13e37b6ce0dd";
+
+        $(document).ready(function () {
+            // Send an AJAX request
+            $.getJSON(uri)
+                .done(function (data) {
+                    var items = [];
+                    // On success, 'data' contains a list of products.
+                    $.each(data, function (key, val) {
+
+                        items.push('<li id="' + key + '">' + val + '</li>');
+
+                        $('<ul/>',
+                         {
+                             'class': 'interest-list',
+                              html: items.join('')
+                         }).appendTo('body');
+                        
+                        
+                        //$('<li>', {data:i.item}).appendTo('#champions');
+                    });
+             });
+        });
+
+        //$(document).ready(function () {
+        //    // Send an AJAX request
+        //    $.get(uri)
+        //        .done(function (data) {
+        //            // On success, 'data' contains a list of products.
+        //            $.each(data, function (key, item) {
+        //                // Add a list item for the product.
+        //                $('<li>', { text: item }).appendTo($('#champions'));
+        //            });
+        //        });
+        //});
+
+        //function formatItem(item) {
+        //    return item.Name + ': $' + item.Price;
+        //}
+
+        function find() {
+            var id = $('#champId').val();
+            $.getJSON(uri + '/' + id)
+                .done(function (data) {
+                    $('#champion').text(formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#champion').text('Error: ' + err);
+                });
+        }
+    </script>
+</body>
+
+
+
