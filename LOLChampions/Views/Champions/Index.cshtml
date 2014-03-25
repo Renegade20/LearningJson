@@ -33,16 +33,13 @@
                     $.each(data.data, function (index, val) {
 
                         items.push('<li id="' + index + '">' + val.name + '</li>');
-
-                        $('<ul/>',
-                         {
-                             'class': 'interest-list',
-                              html: items.join('')
-                         }).appendTo('body');
-                        
-                        
                         //$('<li>', {data:i.item}).appendTo('#champions');
                     });
+                    $('<ul/>',
+                        {
+                            'class': 'interest-list',
+                            html: items.join('')
+                        }).appendTo('body');
              });
         });
 
