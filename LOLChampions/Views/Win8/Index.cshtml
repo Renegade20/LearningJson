@@ -3,41 +3,63 @@
     ViewBag.Title = "Index";
 }
 
-<html>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+<script>
+    var uri = "https://prod.api.pvp.net/api/lol/static-data/na/v1/champion?api_key=9af31022-0fe1-4e69-9c9a-13e37b6ce0dd";
 
-<body>
-   
+    $(document).ready(function () {
+        // Send an AJAX request
+        $.getJSON(uri)
+            .done(function (data) {
 
-    <div class="panel panel-danger col-lg-2" style="margin-top : 7px;">
-        <div class="panel-heading">
-            <h3 class="panel-title">Panel 1</h3>
+                var items = [];
+                // On success, 'data' contains a list of products.
+                $.each(data.data, function (index, val) {
+
+
+                    items.push('<li id="' + index + '">' + val.name + '</li>');
+                    //$('<li>', {data:i.item}).appendTo('#champions');
+                });
+
+                var itemlen = items.length;
+
+                $('<ul/>',
+                    {
+                        'class': 'interest-list',
+                        html: items.join('')
+                    }).appendTo('#champNames');
+
+            });
+    });
+
+</script>
+
+    <div class="row">
+        <div class="panel panel-danger col-md-2" style="margin-top:7px;">
+            <div class="panel-heading">
+                <h3 class="panel-title">Panel 1</h3>
+            </div>
+            <div class="panel-body">
+                Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.
+            </div>
         </div>
-        <div class="panel-body">
-            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.
+
+        <div class="panel panel-success col-md-8" style="margin-top: 7px;">
+            <div class="panel-heading">
+                <h3 class="panel-title">Panel 2</h3>
+            </div>
+            <div class="panel-body">
+                Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.
+            </div>
         </div>
-    </div>
 
-    <div class="panel panel-success col-lg-7" style="margin-top : 7px;">
-        <div class="panel-heading">
-            <h3 class="panel-title">Panel 2</h3>
+        <div class="panel panel-primary col-md-2" style="margin-top : 7px;">
+            <div class="panel-heading">
+                <h3 class="panel-title">Panel 3</h3>
+            </div>
+            <div class="panel-body">
+                Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.
+            </div>
         </div>
-        <div class="panel-body">
-            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.
-        </div>
-    </div>
 
-    <div class="panel panel-primary col-lg-3" style="margin-top : 7px;">
-        <div class="panel-heading">
-            <h3 class="panel-title">Panel 3</h3>
-        </div>
-        <div class="panel-body">
-            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.
-        </div>
-    </div>
-
-</body>
-
-
-</html>
-
-
+</div>
