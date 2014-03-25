@@ -9,7 +9,7 @@
 <body>
 
     <div>
-        <h2>All Campions</h2>
+        <h2>All Champions</h2>
         <ul id="champions" />
         
     </div>
@@ -30,19 +30,16 @@
                 .done(function (data) {
                     var items = [];
                     // On success, 'data' contains a list of products.
-                    $.each(data, function (key, val) {
+                    $.each(data.data, function (index, val) {
 
-                        items.push('<li id="' + key + '">' + val + '</li>');
-
-                        $('<ul/>',
-                         {
-                             'class': 'interest-list',
-                              html: items.join('')
-                         }).appendTo('body');
-                        
-                        
+                        items.push('<li id="' + index + '">' + val.name + '</li>');
                         //$('<li>', {data:i.item}).appendTo('#champions');
                     });
+                    $('<ul/>',
+                        {
+                            'class': 'interest-list',
+                            html: items.join('')
+                        }).appendTo('body');
              });
         });
 
