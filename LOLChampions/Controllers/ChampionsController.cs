@@ -6,6 +6,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Mvc;
+using Newtonsoft;
+using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace LOLChampions.Controllers
 {
@@ -33,12 +36,28 @@ namespace LOLChampions.Controllers
 
         public ActionResult Index()
         {
-        
+                
+           
+
             return View();
         }
 
 
-      
+        public ActionResult Details(int id)
+        {
+            StreamReader sr = new StreamReader("C:\\Users\\craigky\\Documents\\GitHub\\LearningJson\\LOLChampions\\JFiles\\champion.json");
+            string jsonString = sr.ReadToEnd();
+            sr.Close();
+
+
+            JObject jObj = JObject.Parse(jsonString);
+
+            var champion = new Champion { name = (string)jObj["data"]["name"] };
+           
+            
+
+            return View(champion);
+        }
 
     }
 
