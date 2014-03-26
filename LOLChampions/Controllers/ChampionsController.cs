@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Newtonsoft;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using LOLChampions.ViewModels;
 
 namespace LOLChampions.Controllers
 {
@@ -45,18 +46,34 @@ namespace LOLChampions.Controllers
 
         public ActionResult Details(int id)
         {
-            StreamReader sr = new StreamReader("C:\\Users\\craigky\\Documents\\GitHub\\LearningJson\\LOLChampions\\JFiles\\champion.json");
+           // StreamReader sr = new StreamReader("C:\\Users\\craigky\\Documents\\GitHub\\LearningJson\\LOLChampions\\JFiles\\champion.json");
+			StreamReader sr = new StreamReader("D:\\GitHub\\LearningJson\\LOLChampions\\JFiles\\champion.json");
             string jsonString = sr.ReadToEnd();
             sr.Close();
 
 
             JObject jObj = JObject.Parse(jsonString);
 
-            var champion = new Champion { name = (string)jObj["data"]["name"] };
+            //var champion = new Champion { name = (string)jObj["data"]["name"]};
+			string[] Champions = new string[500];
+			int index = 0;
+			foreach(var item in jObj["data"])
+			{
+				foreach (var champ in item)
+				{
+					var details = champ as JObject;
+					Champions[++index] = details["name"] + "";
+				}
+			}
+			//This part really isn't necessary right now I'll explain later
+			//var Champion = new Champion { name = Champions[id] };
+
+			// You need a view model to pass information to the view I'll set it here
+			var model = new ChampionViewModel { Name = Champions[id] };
            
             
 
-            return View(champion);
+            return View(model);
         }
 
     }
