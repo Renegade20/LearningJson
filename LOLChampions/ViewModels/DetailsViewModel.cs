@@ -6,9 +6,9 @@ using System.Web;
 
 namespace LOLChampions.ViewModels
 {
-	public class ChampionViewModel
-	{
-		public List<Champion> championsList { get; set; }
-        
-	}
+    public class DetailsViewModel
+    {
+        public Champion championDetails { get; set; }
+
+    }
 }

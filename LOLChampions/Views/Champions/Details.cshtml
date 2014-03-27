@@ -1,10 +1,16 @@
-﻿@model LOLChampions.ViewModels.ChampionViewModel
-
+﻿@model LOLChampions.ViewModels.DetailsViewModel
 @{
     ViewBag.Title = "Details";
 }
 
 <h2>Details</h2>
 
-<h2>Champion Name: @Model.Name</h2>
+<h2>Champion Name:</h2>
+
+@Model.championDetails;
+
+
+
+
+
 

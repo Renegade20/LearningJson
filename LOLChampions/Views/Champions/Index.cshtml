@@ -1,66 +1,56 @@
-﻿
+﻿@model LOLChampions.ViewModels.ChampionViewModel
+
 @{
     ViewBag.Title = "Index";
 }
 
-<head>
-    <title>Campions App</title>
-</head>
-<body>
+<h2>All Champions</h2>
 
-    <div id="champNames">
-        <h2>All Champions</h2>                
-    </div>
+@{var count = 0;}
 
-    <p id="champLength"></p>
-    @*<div>
-        <h2>Search by ID</h2>
-        <input type="text" id="champId" size="5" />
-        <input type="button" value="Search" onclick="find();" />
-        <p id="champion" />
-    </div>*@
 
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
-    <script>
-        var uri = "https://prod.api.pvp.net/api/lol/static-data/na/v1/champion?api_key=9af31022-0fe1-4e69-9c9a-13e37b6ce0dd";
+<h3>Sort</h3>
 
-        $(document).ready(function () {
-            // Send an AJAX request
-            $.getJSON(uri)
-                .done(function (data) {
-                    
-                    var items = [];
-                    // On success, 'data' contains a list of products.
-                    $.each(data.data, function (index, val) {
+Fighter: <input type="checkbox"  title="Fighter" name="Fighter" />
+Assassin: <input type="checkbox" title="Assassin"/>
+Tank: <input type="checkbox" title="Tank" />
+Mage: <input type="checkbox" title="Mage" />
 
-                        
-                        items.push('<li id="' + index + '">' + val.name + '</li>');
-                        //$('<li>', {data:i.item}).appendTo('#champions');
-                    });
-                    
-                    var itemlen = items.length;
 
-                    $('<ul/>',
-                        {
-                            'class': 'interest-list',
-                            html: items.join('')
-                        }).appendTo('#champNames');
-                    
-             });
-        });
-    </script>
-        @*//function find() {
-        //    var id = $('#champId').val();
-        //    $.getJSON(uri + '/' + id)
-        //        .done(function (data) {
-        //            $('#champion').text(formatItem(data));
-        //        })
-        //        .fail(function (jqXHR, textStatus, err) {
-        //            $('#champion').text('Error: ' + err);
-        //        });
-        //}*@
-    
-</body>
+<br/>
+<br />
+
+<table>    
+    <tr>
+        @foreach (var champ in Model.championsList)
+        {
+            var imageUrl = "../../../Content/Images/champion/" + @champ.image;
+            var linkUrl = "/Champion/Details/" + @champ.name;
+
+            
+            
+                <td style="text-align:center">
+                    <a href="@linkUrl">
+                        <img src="@imageUrl" />
+                    </a>
+                    <br />
+                    <a href="@linkUrl">@champ.name</a>
+                </td>
+            
+            
+            count ++;
+            if (count % 10 == 0)
+            {
+                <tr>
+                  
+                
+               </tr>
+            }
+            
+        }
+    </tr>
+</table>
+
 
 
 
