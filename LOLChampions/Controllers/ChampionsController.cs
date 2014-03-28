@@ -82,7 +82,9 @@ namespace LOLChampions.Controllers
         public JObject PopulateChampsList()
         {
             //Full File Path to Champion.Json
-            StreamReader sr = new StreamReader("C:\\Users\\craigky\\Documents\\GitHub\\LearningJson\\LOLChampions\\JFiles\\champion.json");
+            string url = Server.MapPath("~/Jfiles/champion.json");
+
+            StreamReader sr = new StreamReader(url);
 			string jsonString = sr.ReadToEnd();
             sr.Close();
 
@@ -96,9 +98,10 @@ namespace LOLChampions.Controllers
         public JObject GetIndividualChampionJson(string id)
         {
             //Full File path to selected champion json. (ie annie.json or brando.json)
-            
 
-            StreamReader sr = new StreamReader("C:\\Users\\craigky\\Documents\\GitHub\\LearningJson\\LOLChampions\\JFiles\\champion\\" + id.ToString() + ".json");
+            string url = Server.MapPath("~/Jfiles/champion/" + id + ".json");
+
+            StreamReader sr = new StreamReader(url);
             string jsonString = sr.ReadToEnd();
             sr.Close();
 
